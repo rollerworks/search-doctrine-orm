@@ -27,7 +27,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class EntityCountType extends AbstractFieldType
 {
     /**
-     * @var ManagerRegistry
+     * @var EntityCountConversion
      */
     protected $conversion;
 

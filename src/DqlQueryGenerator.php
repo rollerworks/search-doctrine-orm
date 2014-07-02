@@ -56,7 +56,7 @@ class DqlQueryGenerator extends QueryGenerator
     {
         // If the value requires embedding we inform the DQL function about the parameter-index
         // Where he can then find the value, else its not possible to embed the value safely
-        $valueRequiresEmbedding = $converter->valueRequiresEmbedding($value, $field->getOptions(), $hints);
+        $requiresEmbedding = $converter->valueRequiresEmbedding($value, $field->getOptions(), $hints);
 
         $paramName = $this->getUniqueParameterName($fieldName);
         $this->parameters[$paramName] = $convertedValue;
@@ -68,7 +68,7 @@ class DqlQueryGenerator extends QueryGenerator
             $this->fields[$fieldName]['column'],
             $convertedValue,
             (null === $strategy ? 'null' : $strategy),
-            ($valueRequiresEmbedding ? 'true' : 'false')
+            ($requiresEmbedding ? 'true' : 'false')
         );
     }
 

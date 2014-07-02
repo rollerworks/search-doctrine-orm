@@ -12,6 +12,7 @@
 namespace Rollerworks\Component\Search\Extension\Doctrine\Orm;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 use Rollerworks\Component\Search\AbstractExtension;
 
 /**
@@ -23,13 +24,25 @@ use Rollerworks\Component\Search\AbstractExtension;
 class DoctrineOrmExtension extends AbstractExtension
 {
     /**
+     * Constructor.
+     *
      * @param ManagerRegistry $registry
      * @param array           $managerNames
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(ManagerRegistry $registry, $managerNames = array('default'))
     {
         foreach ((array) $managerNames as $managerName) {
-            $emConfig = $registry->getManager($managerName)->getConfiguration();
+            $manager = $registry->getManager($managerName);
+
+            if (!$manager instanceof EntityManagerInterface) {
+                throw new \InvalidArgumentException(
+                    sprintf('Doctrine Manager "%s" is not an EntityManager.', $managerName)
+                );
+            }
+
+            $emConfig = $manager->getConfiguration();
             /** @var \Doctrine\ORM\Configuration $emConfig */
             $emConfig->addCustomStringFunction(
                 'RW_SEARCH_FIELD_CONVERSION',
