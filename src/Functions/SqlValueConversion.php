@@ -12,6 +12,7 @@
 namespace Rollerworks\Component\Search\Doctrine\Orm\Functions;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
+use Doctrine\ORM\Query\AST;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
 use Doctrine\ORM\Query\Lexer;
@@ -33,12 +34,12 @@ class SqlValueConversion extends FunctionNode
     public $fieldName;
 
     /**
-     * @var \Doctrine\ORM\Query\AST\PathExpression
+     * @var AST\PathExpression
      */
     public $column;
 
     /**
-     * @var \Doctrine\ORM\Query\AST\InputParameter
+     * @var AST\InputParameter|AST\Literal
      */
     public $valueExpression;
 
