@@ -1,0 +1,19 @@
+---------------------------------------------------------------------------
+
+by sstok at 2015-03-10 15:51
+
+And now we can't use Objects because older versions of Doctrine use `var_export` which does not handle circular references! Why the hell can't it just work :rage::boom: :see_no_evil: :clap:
+
+I'm done for today...
+
+---------------------------------------------------------------------------
+
+by sstok at 2015-03-10 16:07
+
+Check if setDefaultQueryHint() is defined and use the new object, else use a closure.
+
+---------------------------------------------------------------------------
+
+by sstok at 2015-03-11 08:55
+
+Or just use the `Doctrine\ORM\Version::VERSION` constant :)
